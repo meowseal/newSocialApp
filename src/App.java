@@ -11,7 +11,7 @@ public class App {
         User user1 = handler.createUser("User1", "pass1");
         User user2 = handler.createUser("User2","pass2");
         handler.login(user1);
-        user1.setBio("Sigma");
+        user1.setBio("Hello welcome to my profile!!");
 
         System.out.println("User1 id: " + user1.getid());
         System.out.println("User2 id: " + user2.getid());
