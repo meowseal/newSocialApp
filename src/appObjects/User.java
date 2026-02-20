@@ -1,87 +1,108 @@
 package appObjects;
 import java.util.Date;
-@SuppressWarnings("unused")
+
+
+@SuppressWarnings("all")
+
 
 public class User {
-  
-  // Initialize Variables for User Object
-  private String username;
-  private String password;
-  private String email;
-  private String phoneNumber;
-  private Date joinDate;
-
-  // Data for user
-  private String bio;
-  private String pronouns;
-  private Date birthday;
 
 
-  // password setting
-  private int passwordAttempts = 0;
-  private int maxAttempts = 5;
-  private boolean loggedIn = false;
+
+    // Initialize Variables for User Object
+    private String username;
+    private String password;
+    private String email;
+    private String phoneNumber;
+    private Date joinDate;
+
+    // Data for user
+    private String bio = "";
+    private String pronouns = "";
+    private Date birthday;
+    private int id;
+
+    // password setting
+    private int passwordAttempts = 0;
+    private int maxAttempts = 5;
+    private boolean loggedIn = false;
 
 
-  // Constructer
-  public User(String username, String password) 
-  {
-    this.username = username;
-    this.password = password;
-  }
-  
-  // getters
-  public String getUsername() {
-    return username;
-  }
-
-  public String getBio()
-  {
-      return bio;
-  }
-
-  public String getPronouns() {
-      return pronouns;
-  }
-
-// Attempt to login to the account
-  public void accountLogin(String attemptedPassword)
-  {
-    if ( passwordAttempts < maxAttempts)
+    // Constructer
+    public User(String username, String password, int id)
     {
-      if (attemptedPassword.equals(password))
-      {
-        // reset password attempts and end statement
-        passwordAttempts = 0;
-        System.out.println("Logged into account " + getUsername());
-        loggedIn = true;
-      }
+        this.username = username;
+        this.password = password;
+        this.id = id;
+    }
 
-      else
-      {
-        // Incriment attempts and tell user how many left
-        passwordAttempts ++;
-        System.out.println("Incorrect password " + (maxAttempts - passwordAttempts) + " remain...");
+    // getters
+    public String getUsername() {
+        return username;
+    }
 
-        if (passwordAttempts == maxAttempts)
+    public String getBio()
+    {
+        return bio;
+    }
+
+    public String getPronouns() {
+        return pronouns;
+    }
+
+    public int getid() {
+        return id;
+    }
+
+    // Attempt to login to the account
+    public int accountLogin(String attemptedPassword)
+    {
+        if ( passwordAttempts < maxAttempts)
+        {
+            if (attemptedPassword.equals(password))
+            {
+                // reset password attempts and end statement
+                passwordAttempts = 0;
+                System.out.println("Logged into account " + getUsername());
+                loggedIn = true;
+                return 0;
+            }
+
+            else
+            {
+                // Incriment attempts and tell user how many attempts are left
+                passwordAttempts ++;
+                System.out.println("Incorrect password " + (maxAttempts - passwordAttempts) + " remain...");
+
+
+                if (passwordAttempts == maxAttempts)
+                {
+                    System.out.println("You have reached the maximum amount of attempts...");
+                    return 101;
+                }
+
+                else
+                {
+                    return 100;
+                }
+
+            }
+
+
+        }
+
+        else
         {
             System.out.println("You have reached the maximum amount of attempts...");
+            return 101;
         }
-        
-      }
-    }
 
-    else
-    {
-      System.out.println("You have reached the maximum amount of attempts...");
     }
-
-  }
 
 
 // Update user settings
 
-    public void updateUsername(String username, String password)
+    public int setUsername(String username, String password)
     {
 
         // Make it so it logs out when you reach max attempts
@@ -89,10 +110,12 @@ public class User {
         {
             this.username = username;
             System.out.println("Username updated successfully...");
+            return 0;
         }
         else
         {
             System.out.println("Incorrect Password...");
+            return 100;
         }
 
 
@@ -100,20 +123,17 @@ public class User {
 
 
     // set bio if logged in
-    public void updateBio(String bio)
+    public void setBio(String bio)
     {
         if (loggedIn)
         {
             this.bio = bio;
-            System.out.println("Updated bio successfully...");
         }
 
-        else
-        {
-            System.out.println("Not logged in...");
-        }
+
 
     }
+
 
     // set pronouns if logged in
     public void updatePronouns (String pronouns)
@@ -123,15 +143,10 @@ public class User {
             this.pronouns = pronouns;
             System.out.println("Updated pronouns successfully...");
         }
-
-        else
-        {
-            System.out.println("Not logged in...");
-        }
     }
 
     // set birthday if logged in
-    public void updateBirthday (Date birthday)
+    public void setBirthday (Date birthday)
     {
         if (loggedIn)
         {
@@ -139,15 +154,22 @@ public class User {
             System.out.println("Updated birthdya successfully...");
         }
 
-        else
-        {
-            System.out.println("Not logged in...");
-        }
-
     }
 
     public String toString() {
-      return "Username: " + getUsername() + "\n Pronouns: " + getPronouns() + "\n Bio: " + getBio();
+        String returnString = ("Username: " + getUsername());
+
+        if (!(pronouns == ""))
+        {
+            returnString += "\nPronouns: " + pronouns;
+        }
+
+        if (!(bio == ""))
+        {
+            returnString += "\n" + bio;
+        }
+
+        return returnString;
     }
 
 }
