@@ -136,7 +136,7 @@ public class User {
 
 
     // set pronouns if logged in
-    public void updatePronouns (String pronouns)
+    public void setPronouns (String pronouns)
     {
         if (loggedIn)
         {
