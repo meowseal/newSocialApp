@@ -157,19 +157,23 @@ public class User {
     }
 
     public String toString() {
-        String returnString = ("Username: " + getUsername());
+        String returnString = (getUsername());
 
         if (!(pronouns == ""))
         {
-            returnString += "\nPronouns: " + pronouns;
+            returnString += "\n" + pronouns;
         }
+
+        else { returnString += "\nNo pronouns";}
 
         if (!(bio == ""))
         {
             returnString += "\n" + bio;
         }
 
-        return returnString;
+        else { returnString += "\nNo bio";}
+
+        return returnString + "\n";
     }
 
 }
